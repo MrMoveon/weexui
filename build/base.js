@@ -1,5 +1,6 @@
 var resolve = require('path').resolve
 var webpack = require('webpack')
+var cssnext = require('postcss-cssnext')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = function getBaseConfig (loader, isDev) {
@@ -12,12 +13,13 @@ module.exports = function getBaseConfig (loader, isDev) {
       'vue': 'Vue',
       'weex-vue-render': 'weexVueRenderer'
     } : {},
+    resolve: {
+      alias: {
+        'vue$': 'vue/dist/vue.runtime.js'
+      }
+    },
     module: {
       rules: [
-        // You can use eslint here
-        // Take eslint-plugin-vue as an example
-        // 1. npm i babel-eslint babel-plugin-transform-runtime babel-runtime babel-preset-stage-2 eslint eslint-config-vue eslint-friendly-formatter eslint-loader eslint-plugin-html eslint-plugin-promise eslint-plugin-vue -D
-        // 2. set the config below
         // {
         //   test: /\.(js|vue)$/,
         //   loader: 'eslint-loader',
@@ -37,11 +39,6 @@ module.exports = function getBaseConfig (loader, isDev) {
         }
       ]
     },
-    resolve: {
-      alias: {
-        'vue$': 'vue/dist/vue.runtime.js'
-      }
-    },
     plugins: [
       new webpack.BannerPlugin({
         banner: '// { "framework": "Vue" }\n',
@@ -49,16 +46,11 @@ module.exports = function getBaseConfig (loader, isDev) {
       }),
       new webpack.LoaderOptionsPlugin({
         vue: {
-          // // You can use PostCSS now!
-          // // Take cssnext for example:
-          // // 1. npm install postcss-cssnext --save-dev
-          // // 2. write `var cssnext = require('postcss-cssnext')` at the top
-          // // 3. set the config below
-          // postcss: [cssnext({
-          //   features: {
-          //     autoprefixer: false
-          //   }
-          // })]
+          postcss: [cssnext({
+            features: {
+              autoprefixer: false
+            }
+          })]
         }
       })
     ].concat(isDev ? [

@@ -24,7 +24,6 @@ new devServer(webpack([webConfig, weexConfig]), {
   port: port,
   host: '0.0.0.0',
   // disable host check to avoid `Invalid Host header` issue
-  // see: https://github.com/webpack/webpack-dev-server/issues/882
   disableHostCheck: true,
   hot: true,
   stats: { colors: true }
