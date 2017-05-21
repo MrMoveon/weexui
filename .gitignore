@@ -1,0 +1,8 @@
+node_modules
+dist
+*log
+platforms/ios
+platforms/android
+plugins/*
+!plugins/README.md
+!plugins/fetch.json
